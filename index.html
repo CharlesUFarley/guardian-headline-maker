@@ -101,6 +101,7 @@
                                 <button type="button" class="btn btn-primary name"           value="carolecadwalladr">Carole Cadwalladr</button>
                                 <button type="button" class="btn btn-primary name"           value="carolinecriadoperez">Caroline Criado-Perez</button>
                                 <button type="button" class="btn btn-primary name"           value="davidmitchell">David Mitchell</button>
+                                <button type="button" class="btn btn-primary name name-pink" value="">Editorial</button>
                                 <button type="button" class="btn btn-primary name"           value="faizashaheen">Faiza Shaheen</button>
                                 <button type="button" class="btn btn-primary name"           value="gabyhinsliff">Gaby Hinsliff</button>
                                 <button type="button" class="btn btn-primary name"           value="georgemonbiot">George Monbiot</button>
@@ -382,10 +383,16 @@
         console.log("Default Font Size = " + defaultNameFontSize)
 
         $(".name").click(function() {
-            $(".loader").show();
-            $(".photo img").css('opacity', '0.2');
-            $(".photo img").attr('crossOrigin', 'Anonymous');
-            $(".photo img").attr('src', 'images/mugshots/' + this.value + '.png');
+
+            if (this.value == "") {
+                $(".photo").hide()
+            } else {
+                $(".photo").show()
+                $(".loader").show();
+                $(".photo img").css('opacity', '0.2');
+                $(".photo img").attr('crossOrigin', 'Anonymous');
+                $(".photo img").attr('src', 'images/mugshots/' + this.value + '.png');
+            }
             
             if (this.hasAttribute("overrideName")) {
                 console.log("override name: " + this.getAttribute("overrideName"))
