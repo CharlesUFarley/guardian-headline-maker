@@ -2,14 +2,14 @@
 <html lang="en">
 
 <head>
-    <title>Guardian Headline Generator</title>
+    <title>Grauniad Headline Generator</title>
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="stylesheet" type="text/css" href="resources/bootstrap.css">
-    <link rel="stylesheet" type="text/css" href="resources/v2.5.css?v1.1">
+    <link rel="stylesheet" type="text/css" href="resources/v2.6.css?v1">
 
     <script type="text/javascript" src="resources/html2canvas.min.js"></script>    
     <script type="text/javascript" src="resources/FileSaver.204.js"></script>
@@ -27,11 +27,16 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-12">
 
+					<div class="alert alert-warning center-text alert-dismissible">
+						<a href="#" id="close" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+						<strong>Fear not, they will return</strong>
+					</div>
+
                     <noscript>
                         <div class="alert alert-warning center-text alert-dismissible">
                             <a href="#" id="close" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                             <strong>If you can read this then the site is being broken by whatever site you're using to browse it or you have javascript off, either way there isn't much that we can do to fix it.</strong>
-                        </div>                    
+                        </div>
                     </noscript>
 
                     <div class="alert alert-warning center-text alert-dismissible ie_warning" id="ie_warning">
@@ -127,6 +132,7 @@
                             <button type="button" class="btn btn-primary name"           value="carolecadwalladr">Carole Cadwalladr</button>
                             <button type="button" class="btn btn-primary name"           value="carolinecriadoperez">Caroline Criado-Perez</button>
                             <button type="button" class="btn btn-primary name"           value="davidmitchell">David Mitchell</button>
+                            <button type="button" class="btn btn-primary name name-pink" value="">Editorial</button>
                             <button type="button" class="btn btn-primary name"           value="faizashaheen">Faiza Shaheen</button>
                             <button type="button" class="btn btn-primary name"           value="gabyhinsliff">Gaby Hinsliff</button>
                             <button type="button" class="btn btn-primary name"           value="georgemonbiot" numImages=4>George Monbiot</button>
@@ -138,7 +144,7 @@
                             <button type="button" class="btn btn-primary name name-pink" value="kehindeandrews">Kehinde Andrews</button>
                             <button type="button" class="btn btn-primary name"           value="marinahyde" numImages=2>Marina Hyde</button>
                             <button type="button" class="btn btn-primary name"           value="martinkettle">Martin Kettle</button>
-                            <button type="button" class="btn btn-primary name name-pink" value="martinrowson">Martin Rowson</button>
+                            <button type="button" class="btn btn-primary name"           value="martinrowson">Martin Rowson</button>
                             <button type="button" class="btn btn-primary name"           value="mehdihasan">Mehdi Hasan</button>
                             <button type="button" class="btn btn-primary name"           value="monaeltahawy">Mona Eltahawy</button>
                             <button type="button" class="btn btn-primary name"           value="nesrinemalik">Nesrine Malik</button>
@@ -148,7 +154,7 @@
                             <button type="button" class="btn btn-primary name"           value="rhiannonlucycosslett">Rhiannon Lucy Cosslett</button>
                             <button type="button" class="btn btn-primary name"           value="simonjenkins">Simon Jenkins</button>
                             <button type="button" class="btn btn-primary name"           value="vanbadham">Van Badham</button>
-                            <button type="button" class="btn btn-primary name name-pink" value="willhutton">Will Hutton</button>
+                            <button type="button" class="btn btn-primary name"           value="willhutton">Will Hutton</button>
                             <button type="button" class="btn btn-primary name"           value="willself">Will Self</button>
                             <button type="button" class="btn btn-primary name"           value="yasminalibhaibrown">Yasmin Alibhai-Brown</button>
                             <button type="button" class="btn btn-primary name"           value="zoewilliams">Zoe Williams</button>
@@ -169,7 +175,7 @@
                             <button type="button" class="btn btn-primary name"           value="nicolasturgeon">Nicola Sturgeon</button>
                             <button type="button" class="btn btn-primary name"           value="nishkumar">Nish Kumar</button>
                             <button type="button" class="btn btn-primary name"           value="shelaghfogarty">Shelagh Fogarty</button>
-                            <button type="button" class="btn btn-primary name name-pink" value="stevebray">Steve Bray</button>
+                            <button type="button" class="btn btn-primary name"           value="stevebray">Steve Bray</button>
                             <button type="button" class="btn btn-primary name"           value="ursulavonderleyen">Ursula von der Leyen</button>
                         </div>
 
@@ -229,6 +235,7 @@
                             <button type="button" class="btn btn-primary name"           value="donlemon">Don Lemon</button>
                             <button type="button" class="btn btn-primary name"           value="gerryadams">Gerry Adams</button>
                             <button type="button" class="btn btn-primary name"           value="gretathunberg">Greta Thunberg</button>
+                            <button type="button" class="btn btn-primary name name-pink" value="huwedwards">Huw Edwards</button>
                             <button type="button" class="btn btn-primary name"           value="indiawilloughby">India Willoughby</button>
                             <button type="button" class="btn btn-primary name"           value="jackmonroe">Jack Monroe</button>
                             <button type="button" class="btn btn-primary name name-pink" value="juliapatterson">Dr Julia Grace Patterson</button>
@@ -340,7 +347,8 @@
             if ( document.getElementById('meme-byline-area').innerText.trim().length == 0) {
                 document.getElementById('meme-byline-area').style.display = "none";
             }
-            
+
+			document.getElementById('savemessage').innerText = "Trying";
             navigator.permissions.query({ name: "clipboard-write" }).then((result) => {
                 if (result.state == "granted") {
                     html2canvas(document.querySelector("#meme-bg-target"), {
@@ -353,13 +361,15 @@
                                 document.getElementById('savemessage').innerText = "Success";
                             },
                             () => {
-                                document.getElementById('savemessage').innerText = "Error";
+                                document.getElementById('savemessage').innerText = "Failed";
                             }
                         ));
                     }).then(() => {
                         document.getElementById('meme-byline-area').style.display = "block";
                     });                
-                }
+                } else {
+					document.getElementById('savemessage').innerText = "Failed";
+				}
             });
         } catch(e) {
             console.log("exception copying to the clipboard.  only chrome supports this.");
@@ -451,19 +461,27 @@
             }); 
         }));
 
-        const loadProfile = function(name, imageNum = 1) {
-            document.getElementById('meme-name-area').innerHTML = profiles[name].displayName;
-            document.getElementById('meme-name-area').style.fontSize = profiles[name].displayFontSize;
+        const loadProfile = function(mugshotName, imageNum = 1) {
+            document.getElementById('meme-name-area').innerHTML = profiles[mugshotName].displayName;
+            document.getElementById('meme-name-area').style.fontSize = profiles[mugshotName].displayFontSize;
 
-            if (imageNum > 1) name += `_${imageNum}`;
+            if (imageNum > 1) mugshotName += `_${imageNum}`;
+
+            // no profile image
+            if (mugshotName == "") {
+                document.getElementById("photo").hidden = true;
+                return;
+            }
+
+            document.getElementById("photo").hidden = false;
 
             if (typeof allImages == 'object') {
-                document.getElementById("photo").src = allImages[name];
+                document.getElementById("photo").src = allImages[mugshotName];
             } else {
                 // otherwise load the image from the disk with a loader icon
                 document.getElementById("loader").style.display = "block";
-                console.log(`requesting image ${name}`);                
-                document.getElementById("photo").src = `images/mugshots/${name}.png`;
+                console.log(`requesting image ${mugshotName}`);                
+                document.getElementById("photo").src = `images/mugshots/${mugshotName}.png`;
             }
         }
 
@@ -512,8 +530,8 @@
             // time now in UTC
             const utcStr = new Date().toUTCString().replace( / GMT$/, "" ); 
 
-            // some time in the last/next 6 hours 
-            var pastTime = new Date(utcStr) - Math.floor(Math.random() * 60000 * 60 * 6) + Math.floor(Math.random() * 60000 * 60 * 6);
+            // some time in the last 12 hours
+            var pastTime = new Date(utcStr) - Math.floor(Math.random() * 43200000 );
             var newTime = new Date(pastTime)
             let weekday = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][newTime.getDay()]
             let month   = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][newTime.getMonth()]
