@@ -352,16 +352,9 @@
     });
 
     document.addEventListener("DOMContentLoaded", function(e) {
-        console.log("useragent = " + navigator.userAgent);
-        if (typeof allImages == 'object') {
-            console.log("using javascript images");
-        } else {
-            console.log("javascript images not loaded so loading images from server on request");
-        }
         
         // copy canvas to clipboard is only supported in chrome and only over https
         if (navigator.userAgent.includes("Chrom") && 'https:' == document.location.protocol) {
-            console.log("enabling copy button")
             document.getElementById("copy-to-clipboard").style.display = 'block';
         }
 
