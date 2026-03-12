@@ -10,8 +10,10 @@ do
     echo "  '$filename': 'data:image/png;base64,$base',"
 done
 
-base=`base64 "../template.png" -w 0`
-echo "  'template': 'data:image/png;base64,$base'"
+#base=`base64 "../template.png" -w 0`
+#echo "  'template': 'data:image/png;base64,$base'"
+echo "  'template':''"
+
 
 echo }
 echo
